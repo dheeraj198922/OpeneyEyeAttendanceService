@@ -18,9 +18,9 @@ public class AttendanceServiceApplication {
 		SpringApplication.run(AttendanceServiceApplication.class, args);
 	}
 	
-	@Bean
-	public RestTemplate restTemplate() {
-	    return new RestTemplateBuilder().build();
-	}
+	/*
+	 * @Bean public RestTemplate restTemplate() { return new
+	 * RestTemplateBuilder().build(); }
+	 */
 
 }

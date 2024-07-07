@@ -39,10 +39,11 @@ spring:
   application:
     name: ATTENDANCE-SERVICE
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    password: root
-    url: jdbc:mysql://localhost:3306/openeye
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    
+    url: jdbc:mysql://mysqldb/openeye?createDatabaseIfNotExist=true
     username: root
+    password: root
   jpa:
     hibernate:
       ddl-auto: update
@@ -54,3 +55,14 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /swagger-ui.html
+eureka:
+  instance:
+    prefer-ip-address: true
+    hostname: localhost    
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
