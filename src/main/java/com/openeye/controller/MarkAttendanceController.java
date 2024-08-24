@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,21 +18,26 @@ import com.openeye.service.MarkAttendanceService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @RestController
-@RequestMapping("/attendance/markAttendance")
+@RequestMapping("/attendance")
 public class MarkAttendanceController {
 
 	private static final String RESILIENCE4J_INSTANCE_NAME = "employeeResilience4j";
 	@Autowired
 	MarkAttendanceService attendanceService;
 
-	@PostMapping("/employee/{employeeId}")
-	@CircuitBreaker(name = RESILIENCE4J_INSTANCE_NAME, fallbackMethod = RESILIENCE4J_INSTANCE_NAME)
+	@PostMapping("/{employeeId}")
+	//@CircuitBreaker(name = RESILIENCE4J_INSTANCE_NAME, fallbackMethod = RESILIENCE4J_INSTANCE_NAME)
 	public ResponseEntity<Attendance> markAttendance(@PathVariable String employeeId ) {
 		
 		Attendance markAttendance = attendanceService.markAttendance(employeeId);
 		return new ResponseEntity<Attendance>(markAttendance, HttpStatus.CREATED);
 	}
-
+	
+	@GetMapping("/test")
+	public ResponseEntity<String> test( ) {
+		
+		return new ResponseEntity<>("its working", HttpStatus.OK);
+	}
 	
 	public ResponseEntity<Attendance> employeeResilience4j(String employeeId, Exception exception){
 		Attendance markAttendance = new Attendance();

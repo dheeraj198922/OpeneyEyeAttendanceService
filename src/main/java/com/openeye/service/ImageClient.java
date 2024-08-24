@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.openeye.model.CaptureImage;
 
-@FeignClient(value = "images", url = "http://localhost:8083")
+@FeignClient(value = "images", url = "http://openeyeimageservice:8083",  path = "/images")
+//@FeignClient("openeyeimageservice")
 public interface ImageClient {
-	 @RequestMapping(method = RequestMethod.GET, value = "/images/{employeeId}")
+	 @RequestMapping(method = RequestMethod.GET, value = "/{employeeId}")
 	//@GetMapping("/images/{employeeId}")
 	public CaptureImage capturedEmployeeDetails(@PathVariable("employeeId") String employeeId);
 }

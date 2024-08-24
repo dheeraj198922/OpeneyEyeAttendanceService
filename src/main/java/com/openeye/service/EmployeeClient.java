@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.openeye.model.Employee;
 //
-//@FeignClient(value = "employee", url = "http://localhost:8081")
-@FeignClient("EMPLOYEE-SERVICE")
+@FeignClient(value = "employee", url = "http://openeyeemployeeservice:9091",  path = "/employee")
+//@FeignClient("openeyeemployeeservice")
 public interface EmployeeClient {
 	//@GetMapping("/{employeeId}")
 	
-	  @RequestMapping(method = RequestMethod.GET, value = "/employee/{employeeId}")
+	  @RequestMapping(method = RequestMethod.GET, value = "/{employeeId}")
 	  Employee getEmployee(@PathVariable("employeeId") String employeeId);
 	 
-	 @RequestMapping(method = RequestMethod.GET, value = "/employee")
+	 @RequestMapping(method = RequestMethod.GET)
 	 List<Employee> getEmployees();
 }
